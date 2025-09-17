@@ -3,3 +3,5 @@ datasets
 torch
 sklearn
 einops
+matplotlib
+seaborn

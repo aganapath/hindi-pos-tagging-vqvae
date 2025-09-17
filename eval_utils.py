@@ -50,3 +50,19 @@ def many_to_one(gold_predicted_joined, config, label2index, index2label):
         m1_totals[index2label[m1_tag]] = totals
 
     return m1_totals, pred_to_m1
+
+def m1_accuracy(m1_totals):
+    correct = 0
+    total = 0
+    for k, count_dict in m1_totals.items():
+        if k in count_dict.keys():
+            k_correct = count_dict[k]
+            correct += k_correct
+
+        k_total = sum(count_dict.values())
+        total += k_total
+
+    accuracy = (correct / total) * 100
+    print(f"Overall M1 accuracy is {accuracy:.2f}%")
+
+    return accuracy

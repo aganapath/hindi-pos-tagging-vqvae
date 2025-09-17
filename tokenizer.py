@@ -72,8 +72,10 @@ class Tokenizer:
 
     def set_embeddings_mode(self, input, tags):
         processed_input = self._pad_or_truncate(input, self.max_seq_len)
+        processed_tags = self._pad_or_truncate(tags, self.max_seq_len)
         vocab_ids = self._vocab_tokenizer(processed_input)
         token_ids, attention_mask, special_tokens_mask, token_word_ids = self._bert_tokenizer(processed_input)
+        labels = self._label_tokenizer(processed_tags)
 
         tensor_dictionary = {
             "vocab_ids": vocab_ids,
@@ -81,9 +83,9 @@ class Tokenizer:
             "attention_mask": attention_mask,
             "spec_tok_mask": special_tokens_mask,
             "token_word_ids": token_word_ids,
+            "labels": labels,
             "char_ids": None,
-            "char_word_ids": None,
-            "labels": None
+            "char_word_ids": None
         }
 
         if self.config.use_char_architecture:

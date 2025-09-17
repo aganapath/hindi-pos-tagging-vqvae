@@ -49,8 +49,8 @@ def read_parquet_file(file_path: str, n: int, random_state: int, train_size: int
 
     return train_sents, dev_sents
 
-def item_indexer(item_of_lists, labels=False):
-    item2index = {item: idx+1 for idx, item in enumerate(dict.fromkeys(item_of_lists))}
+def item_indexer(list_of_items, labels=False):
+    item2index = {item: idx+1 for idx, item in enumerate(dict.fromkeys(sorted(list_of_items)))}
 
     if not labels:
         item2index["UNK"] = len(item2index)

@@ -3,12 +3,10 @@ import torch
 def collate_fn(batch):
     """Collate function for DataLoader"""
     vocab_ids = torch.stack([item['vocab_ids'] for item in batch])
-    labels = None
+    labels = torch.stack([item['labels'] for item in batch])
     char_ids = None
     char_word_ids = None
 
-    if batch[0]['labels'] is not None:
-        labels = torch.stack([item['labels'] for item in batch])
     if batch[0]['char_ids'] is not None:
         char_ids = torch.stack([item['char_ids'] for item in batch])
     if batch[0]['char_word_ids'] is not None:

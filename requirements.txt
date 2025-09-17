@@ -1,6 +1,6 @@
 transformers
 datasets
-torch
+torch==2.6.0
 sklearn
 einops
 matplotlib
